@@ -11,16 +11,25 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = 10.8
 
   s.requires_arc = true
-  s.source_files = 'src/{inlines,blocks,detab,bstrlib,scanners,print,html,utf8}.c', 'src/*.h'
+  s.source_files = 'src/*.c', 'src/*.h'
+  s.exclude_files = 'src/main.c'
 
-  #s.compiler_flags = '-Wno-shorten-64-to-32'
+  s.compiler_flags = '-Wno-shorten-64-to-32'
   s.preserve_path = 'src/case_fold_switch.inc'
   s.prepare_command = <<-CMD
     cat >src/cmark_export.h <<EOF
 #define CMARK_EXPORT __attribute__((visibility("default")))
 EOF
 
-    touch src/cmark_version.h
+    cat >src/cmark_version.h <<EOF
+#ifndef CMARK_VERSION_H
+#define CMARK_VERSION_H
+
+#define CMARK_VERSION ((0 << 16) | (17 << 8)  | 0)
+#define CMARK_VERSION_STRING "0.17.0"
+
+#endif
+EOF
 
     cat >src/config.h <<EOF
 #define HAVE_STDBOOL_H
