@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   
   s.dependency 'Bypass'
   s.dependency 'CGLMail'
-  s.dependency 'ContentfulDeliveryAPI', '~> 1.4.7'
+  s.dependency 'ContentfulDeliveryAPI', '>= 1.4.7'
   s.dependency 'DDPageControl'
   s.dependency 'TSMiniWebBrowser@dblock'
 end
